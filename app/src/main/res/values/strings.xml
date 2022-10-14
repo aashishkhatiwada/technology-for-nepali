@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">technology for nepali</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy_text_string"> currently playing track: </string>
+    <string name="rewind_fast_forward">rewind/fast forward:</string>
+</resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/devin/AndroidStudioProjects/technologyfornepali/technologyfornepali/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/projects/technologyfornepali/app/src/main/res/drawable-v24/ic_notification.xml" value="0.19583333333333333" />
+        <entry key="..\:/projects/technologyfornepali/app/src/main/res/drawable/ic_fm.xml" value="0.23125" />
+        <entry key="..\:/projects/technologyfornepali/app/src/main/res/drawable/ic_play.xml" value="0.2203125" />
+        <entry key="..\:/projects/technologyfornepali/app/src/main/res/layout/activity_audio_and_fm.xml" value="0.21510416666666668" />
+        <entry key="..\:/projects/technologyfornepali/app/src/main/res/layout/activity_main.xml" value="0.2667572463768116" />
+        <entry key="..\:/projects/technologyfornepali/app/src/main/res/layout/activity_music_player.xml" value="0.1" />
+        <entry key="..\:/projects/technologyfornepali/app/src/main/res/layout/fm_row.xml" value="0.1921875" />
+        <entry key="..\:/projects/technologyfornepali/app/src/main/res/layout/fragment_f_m.xml" value="0.2078125" />
+        <entry key="..\:/projects/technologyfornepali/app/src/main/res/layout/fragment_music.xml" value="0.21510416666666668" />
+        <entry key="..\:/projects/technologyfornepali/app/src/main/res/xml/network_security_config.xml" value="0.18568840579710144" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

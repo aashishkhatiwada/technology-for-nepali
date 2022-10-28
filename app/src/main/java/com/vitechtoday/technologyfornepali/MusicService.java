@@ -52,7 +52,9 @@ mediaPlayer.reset();
         }
     }
     public  boolean isPlaying() {
+        if (mediaPlayer != null)
         return  mediaPlayer.isPlaying();
+        return  false;
     }
     public  void  playAudio() {
         if ((mediaPlayer !=null)&&(!mediaPlayer.isPlaying()))

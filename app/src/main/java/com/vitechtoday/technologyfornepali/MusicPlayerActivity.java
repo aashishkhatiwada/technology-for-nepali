@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.view.View;
-import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -51,6 +50,8 @@ isBound = false;
     }
 };
 private  boolean isBound;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +93,15 @@ rewind_fastForward.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListene
 
     }
 });
+handler.post(new Runnable() {
+    @Override
+    public void run() {
+        if (musicService!=null) {
+            rewind_fastForward.setProgress(musicService.getCurrentPlaybackPosition());
 
+        }
+        handler.postDelayed(this, 1000);
+    }
+});
     }
 }

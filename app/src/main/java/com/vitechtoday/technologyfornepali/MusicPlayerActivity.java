@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSeekBar;
 
+import com.google.android.material.button.MaterialButton;
 import com.vitechtoday.technologyfornepali.model.AudioTrack;
 
 import java.util.ArrayList;
@@ -21,7 +22,10 @@ import java.util.ArrayList;
 public class MusicPlayerActivity extends AppCompatActivity {
 private AppCompatSeekBar rewind_fastForward;
 private TextView currently_playing_info_textView;
-private Button play_pause_button;
+private MaterialButton play_pause_button;
+private MaterialButton previous_button;
+private  MaterialButton next_button;
+private  MaterialButton shuffle_button;
 private  MusicService musicService;
 private  MusicService.MusicBinder musicBinder;
 private ArrayList<AudioTrack> fileList;

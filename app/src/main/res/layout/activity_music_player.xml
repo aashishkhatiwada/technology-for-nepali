@@ -47,41 +47,42 @@ android:stepSize="1"
     app:layout_constraintTop_toBottomOf="@id/elapsed_time_textView"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"/>
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/previous_button"
         android:layout_marginEnd="230dp"
-        android:drawableStart="@drawable/previous"
-        android:text="previous"
+app:icon="@drawable/previous"
+android:text="previous"
         style="@style/Widget.Material3.Button.UnelevatedButton"
+
 app:layout_constraintTop_toBottomOf="@id/rewind_fastForward"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/play_pause_button"
-        android:drawableStart="@drawable/play"
+        app:icon="@drawable/play"
         android:text="play/pause"
         style="@style/Widget.Material3.Button.UnelevatedButton"
         app:layout_constraintTop_toBottomOf="@id/rewind_fastForward"
         app:layout_constraintStart_toEndOf="@id/previous_button"/>
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/next_button"
-        android:drawableStart="@drawable/next"
+        app:icon="@drawable/next"
         android:text="next"
         style="@style/Widget.Material3.Button.UnelevatedButton"
         app:layout_constraintTop_toBottomOf="@id/rewind_fastForward"
 app:layout_constraintStart_toEndOf="@id/play_pause_button"/>
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/shuffle_button"
-        android:drawableStart="@drawable/shuffle"
+        app:icon="@drawable/shuffle"
         android:text="shuffle"
         style="@style/Widget.Material3.Button.UnelevatedButton"
         app:layout_constraintTop_toBottomOf="@id/rewind_fastForward"

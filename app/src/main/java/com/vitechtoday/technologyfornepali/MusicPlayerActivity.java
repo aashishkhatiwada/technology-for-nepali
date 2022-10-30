@@ -38,6 +38,9 @@ private  final ServiceConnection serviceConnection = new ServiceConnection() {
         musicService = musicBinder.getMusicService();
         musicService.createAudioTrack(getIntent().getStringExtra(MusicFragment.PATH_KEY));
         musicService.playAudio();
+        musicService.setTracks(fileList);
+        musicService.setPlaybackId(getIntent().getIntExtra(MusicFragment.ITEM_INDEX_CLICKED_KEY, 0));
+
         rewind_fastForward.setMax(musicService.getDuration());
         rewind_fastForward.setContentDescription("current playback position: "+musicService.getCurrentPlaybackPositionAsFormatted());
 
@@ -71,8 +74,12 @@ private  boolean isBound;
             }
         });
         intent = new Intent(MusicPlayerActivity.this, MusicService.class);
+
 startService(intent);
         bindService(intent, serviceConnection, BIND_AUTO_CREATE);
+        if (musicService!=null) {
+            musicService.setPlaybackId(getIntent().getIntExtra(MusicFragment.ITEM_INDEX_CLICKED_KEY, 0));
+        }
 rewind_fastForward.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {

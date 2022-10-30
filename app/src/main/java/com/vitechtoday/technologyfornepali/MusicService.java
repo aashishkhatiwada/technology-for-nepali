@@ -6,9 +6,11 @@ import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.IBinder;
 
+import com.vitechtoday.technologyfornepali.model.AudioTrack;
 import com.vitechtoday.technologyfornepali.model.FMMediaPlayer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class MusicService extends Service {
@@ -19,7 +21,8 @@ public class MusicService extends Service {
     }
     private final IBinder musicBinder = new MusicBinder();
     private MediaPlayer mediaPlayer;
-
+private ArrayList<AudioTrack> tracks;
+private  int playbackId;
     public MusicService() {
     }
 
@@ -45,11 +48,26 @@ public class MusicService extends Service {
 
 mediaPlayer.reset();
             mediaPlayer.setDataSource(path);
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    nextTrack();
+                }
+            });
             mediaPlayer.prepare();
 
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
+    }
+    public  int getPlaybackId() {
+        return  playbackId;
+    }
+    public  void  setPlaybackId(int playbackId) {
+        this.playbackId = playbackId;
+    }
+    public  void  setTracks(ArrayList<AudioTrack> tracks) {
+        this.tracks = tracks;
     }
     public  boolean isPlaying() {
         if (mediaPlayer != null)
@@ -68,6 +86,13 @@ mediaPlayer.seekTo(position);
 
 
         return  mediaPlayer.getCurrentPosition();
+    }
+    public  void  nextTrack() {
+        if (playbackId<= tracks.size()) {
+            playbackId++;
+            createAudioTrack(tracks.get(playbackId).getPath());
+            playAudio();
+        }
     }
     public  String getCurrentPlaybackPositionAsFormatted() {
         long millis = getCurrentPlaybackPosition();

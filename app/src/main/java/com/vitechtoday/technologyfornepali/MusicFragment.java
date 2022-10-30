@@ -33,6 +33,7 @@ public  static  final String CURRENTLY_PLAYING_AUDIO_INFO_KEY = "Currently_playe
 public  static  final  String EXTRA_FILELIST_KEY = "extra fileList";
 public static  final  String INJECTER_KEY = "injecter";
 public  static  final  String PATH_KEY = "path";
+public  static  final String ITEM_INDEX_CLICKED_KEY = "itemIndex";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -55,6 +56,7 @@ private MusicListAdapter.OnItemClickListener onItemClickListener = new MusicList
         intent.putExtra(MusicFragment.CURRENTLY_PLAYING_AUDIO_INFO_KEY, getString(R.string.dummy_text_string)+ fileList.get(position).getArtist()+" "+ fileList.get(position).getTitle());
         intent.putExtra(MusicFragment.INJECTER_KEY, injector);
         intent.putExtra(MusicFragment.PATH_KEY, fileList.get(position).getPath());
+        intent.putExtra(MusicFragment.ITEM_INDEX_CLICKED_KEY, position);
         startActivity(intent);
     }
 };

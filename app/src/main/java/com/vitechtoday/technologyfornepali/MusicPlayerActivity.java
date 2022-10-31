@@ -62,6 +62,24 @@ private  boolean isBound;
         rewind_fastForward = findViewById(R.id.rewind_fastForward);
         currently_playing_info_textView = findViewById(R.id.currently_played_music_info);
         play_pause_button = findViewById(R.id.play_pause_button);
+        next_button = findViewById(R.id.next_button);
+        previous_button = findViewById(R.id.previous_button);
+        next_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (musicService.getPlaybackId() == fileList.size())
+                    return;
+                musicService.nextTrack();
+            }
+        });
+        previous_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (musicService.getPlaybackId()== 0)
+                    return;
+                musicService.previousTrack();
+            }
+        });
         Bundle injecter = getIntent().getBundleExtra(MusicFragment.INJECTER_KEY);
         fileList = (ArrayList<AudioTrack>) injecter.getSerializable(MusicFragment.EXTRA_FILELIST_KEY);
         String trackInfo = getIntent().getStringExtra(MusicFragment.CURRENTLY_PLAYING_AUDIO_INFO_KEY);

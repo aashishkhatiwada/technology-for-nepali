@@ -94,6 +94,13 @@ mediaPlayer.seekTo(position);
             playAudio();
         }
     }
+    public  void  previousTrack() {
+            if (playbackId<= tracks.size()) {
+                playbackId--;
+                createAudioTrack(tracks.get(playbackId).getPath());
+                playAudio();
+            }
+        }
     public  String getCurrentPlaybackPositionAsFormatted() {
         long millis = getCurrentPlaybackPosition();
         String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),

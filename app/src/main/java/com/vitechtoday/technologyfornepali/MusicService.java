@@ -87,19 +87,22 @@ mediaPlayer.seekTo(position);
 
         return  mediaPlayer.getCurrentPosition();
     }
-    public  void  nextTrack() {
+    public  String  nextTrack() {
         if (playbackId<= tracks.size()) {
             playbackId++;
             createAudioTrack(tracks.get(playbackId).getPath());
             playAudio();
         }
+        return  tracks.get(playbackId).getArtist() + " " + tracks.get(playbackId).getTitle();
+
     }
-    public  void  previousTrack() {
+    public  String  previousTrack() {
             if (playbackId<= tracks.size()) {
                 playbackId--;
                 createAudioTrack(tracks.get(playbackId).getPath());
                 playAudio();
             }
+            return  tracks.get(playbackId).getArtist() + " " + tracks.get(playbackId).getTitle();
         }
     public  String getCurrentPlaybackPositionAsFormatted() {
         long millis = getCurrentPlaybackPosition();

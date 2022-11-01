@@ -10,20 +10,20 @@
     android:layout_height="wrap_content"
     android:id="@+id/currently_played_music_info"
     android:padding="9dp"
-    android:drawableTop="@drawable/playing"
     style="@style/TextAppearance.Compat.Notification.Info"
     android:textAlignment="center"
     android:textSize="19sp"
     android:layout_marginBottom="388dp"
+    android:accessibilityLiveRegion="assertive"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+    app:drawableTopCompat="@drawable/playing" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/elapsed_time_textView"
-        android:drawableTop="@drawable/timer"
         android:padding="9dp"
         android:text="Elapsed time: 00:00:00/00:00:00"
         style="@style/TextAppearance.Compat.Notification.Info"
@@ -33,7 +33,8 @@
         app:layout_constraintTop_toBottomOf="@id/currently_played_music_info"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:drawableTopCompat="@drawable/timer" />
 <androidx.appcompat.widget.AppCompatSeekBar
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

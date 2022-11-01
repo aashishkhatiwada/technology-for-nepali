@@ -53,7 +53,7 @@ isBound = false;
     }
 };
 private  boolean isBound;
-
+private  String trackInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,8 @@ private  boolean isBound;
             public void onClick(View view) {
                 if (musicService.getPlaybackId() == fileList.size())
                     return;
-                musicService.nextTrack();
+                trackInfo = musicService.nextTrack();
+                currently_playing_info_textView.setText(getResources().getString(R.string.dummy_text_string) + " " + trackInfo);
             }
         });
         previous_button.setOnClickListener(new View.OnClickListener() {
@@ -77,12 +78,14 @@ private  boolean isBound;
             public void onClick(View view) {
                 if (musicService.getPlaybackId()== 0)
                     return;
-                musicService.previousTrack();
+                trackInfo = musicService.previousTrack();
+                currently_playing_info_textView.setText(getResources().getString(R.string.dummy_text_string) + " " + trackInfo);
+
             }
         });
         Bundle injecter = getIntent().getBundleExtra(MusicFragment.INJECTER_KEY);
         fileList = (ArrayList<AudioTrack>) injecter.getSerializable(MusicFragment.EXTRA_FILELIST_KEY);
-        String trackInfo = getIntent().getStringExtra(MusicFragment.CURRENTLY_PLAYING_AUDIO_INFO_KEY);
+         trackInfo = getIntent().getStringExtra(MusicFragment.CURRENTLY_PLAYING_AUDIO_INFO_KEY);
         handler = new Handler();
         currently_playing_info_textView.setText(trackInfo);
         play_pause_button.setOnClickListener(new View.OnClickListener() {

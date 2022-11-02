@@ -25,6 +25,7 @@ private MaterialButton play_pause_button;
 private MaterialButton previous_button;
 private  MaterialButton next_button;
 private  MaterialButton shuffle_button;
+private  TextView elapsed_time_textView;
 private  MusicService musicService;
 private  MusicService.MusicBinder musicBinder;
 private ArrayList<AudioTrack> fileList;
@@ -42,7 +43,7 @@ private  final ServiceConnection serviceConnection = new ServiceConnection() {
         musicService.setPlaybackId(getIntent().getIntExtra(MusicFragment.ITEM_INDEX_CLICKED_KEY, 0));
 
         rewind_fastForward.setMax(musicService.getDuration());
-        rewind_fastForward.setContentDescription("current playback position: "+musicService.getCurrentPlaybackPositionAsFormatted());
+        rewind_fastForward.setContentDescription("current playback position: "+musicService.getCurrentPlaybackPositionAsFormatted(musicService.getCurrentPlaybackPosition()));
 
         isBound =true;
     }
@@ -61,6 +62,7 @@ private  String trackInfo;
         setContentView(R.layout.activity_music_player);
         rewind_fastForward = findViewById(R.id.rewind_fastForward);
         currently_playing_info_textView = findViewById(R.id.currently_played_music_info);
+        elapsed_time_textView = findViewById(R.id.elapsed_time_textView);
         play_pause_button = findViewById(R.id.play_pause_button);
         next_button = findViewById(R.id.next_button);
         previous_button = findViewById(R.id.previous_button);
@@ -107,7 +109,7 @@ rewind_fastForward.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListene
         if (b) {
             musicService.setPlaybackPosition(i);
         }
-        rewind_fastForward.setContentDescription("current playback position: "+musicService.getCurrentPlaybackPositionAsFormatted());
+        rewind_fastForward.setContentDescription("current playback position: "+musicService.getCurrentPlaybackPositionAsFormatted(musicService.getCurrentPlaybackPosition()));
 
     }
 
@@ -125,6 +127,7 @@ handler.post(new Runnable() {
     @Override
     public void run() {
         if (musicService!=null) {
+            elapsed_time_textView.setText(getString(R.string.elapsed_time) + musicService.getCurrentPlaybackPositionAsFormatted(musicService.getCurrentPlaybackPosition()) + "/" + musicService.getCurrentPlaybackPositionAsFormatted(musicService.getDuration()));
             rewind_fastForward.setProgress(musicService.getCurrentPlaybackPosition());
 
         }

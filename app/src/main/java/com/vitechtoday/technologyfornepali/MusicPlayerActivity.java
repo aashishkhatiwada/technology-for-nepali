@@ -6,6 +6,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -18,9 +19,11 @@ import com.vitechtoday.technologyfornepali.model.AudioTrack;
 
 import java.util.ArrayList;
 
-public class MusicPlayerActivity extends AppCompatActivity {
+public class MusicPlayerActivity extends AppCompatActivity implements  MusicService.OnTrackCompleteListener{
 private AppCompatSeekBar rewind_fastForward;
-private TextView currently_playing_info_textView;
+
+
+    private TextView currently_playing_info_textView;
 private MaterialButton play_pause_button;
 private MaterialButton previous_button;
 private  MaterialButton next_button;
@@ -41,6 +44,7 @@ private  final ServiceConnection serviceConnection = new ServiceConnection() {
         musicService.playAudio();
         musicService.setTracks(fileList);
         musicService.setPlaybackId(getIntent().getIntExtra(MusicFragment.ITEM_INDEX_CLICKED_KEY, 0));
+        musicService.setOnTrackCompleteListener(MusicPlayerActivity.this);
 
         rewind_fastForward.setMax(musicService.getDuration());
         rewind_fastForward.setContentDescription("current playback position: "+musicService.getCurrentPlaybackPositionAsFormatted(musicService.getCurrentPlaybackPosition()));
@@ -55,6 +59,11 @@ isBound = false;
 };
 private  boolean isBound;
 private  String trackInfo;
+    @Override
+    public void onTrackComplete() {
+trackInfo =   musicService.getCurrentTrack(true);
+        currently_playing_info_textView.setText(getResources().getString(R.string.dummy_text_string) + " " + trackInfo);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +111,7 @@ startService(intent);
         bindService(intent, serviceConnection, BIND_AUTO_CREATE);
         if (musicService!=null) {
             musicService.setPlaybackId(getIntent().getIntExtra(MusicFragment.ITEM_INDEX_CLICKED_KEY, 0));
+
         }
 rewind_fastForward.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
     @Override

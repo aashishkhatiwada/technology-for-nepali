@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class MusicService extends Service {
+    public  interface  OnTrackCompleteListener {
+        void  onTrackComplete();
+    }
     public  class  MusicBinder  extends Binder {
         public  MusicService getMusicService() {
             return  MusicService.this;
@@ -23,6 +26,7 @@ public class MusicService extends Service {
     private MediaPlayer mediaPlayer;
 private ArrayList<AudioTrack> tracks;
 private  int playbackId;
+private  OnTrackCompleteListener onTrackCompleteListener;
     public MusicService() {
     }
 
@@ -52,6 +56,7 @@ mediaPlayer.reset();
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
                     nextTrack();
+                    onTrackCompleteListener.onTrackComplete();
                 }
             });
             mediaPlayer.prepare();
@@ -59,6 +64,10 @@ mediaPlayer.reset();
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
+    }
+    public  String getCurrentTrack(boolean isComplete) {
+
+        return  tracks.get(playbackId).getArtist() + " " + tracks.get(playbackId).getTitle();
     }
     public  int getPlaybackId() {
         return  playbackId;
@@ -68,6 +77,9 @@ mediaPlayer.reset();
     }
     public  void  setTracks(ArrayList<AudioTrack> tracks) {
         this.tracks = tracks;
+    }
+    public  void  setOnTrackCompleteListener(OnTrackCompleteListener onTrackCompleteListener) {
+        this.onTrackCompleteListener = onTrackCompleteListener;
     }
     public  boolean isPlaying() {
         if (mediaPlayer != null)

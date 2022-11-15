@@ -79,8 +79,8 @@ app:layout_constraintTop_toBottomOf="@id/rewind_fastForward"
         style="@style/Widget.Material3.Button.UnelevatedButton"
         app:layout_constraintTop_toBottomOf="@id/rewind_fastForward"
 app:layout_constraintStart_toEndOf="@id/play_pause_button"/>
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="wrap_content"
+<CheckBox
+    android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/shuffle_button"
         app:icon="@drawable/shuffle"

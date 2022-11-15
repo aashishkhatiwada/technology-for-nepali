@@ -11,6 +11,8 @@ import com.vitechtoday.technologyfornepali.model.FMMediaPlayer;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.concurrent.TimeUnit;
 
 public class MusicService extends Service {
@@ -90,6 +92,21 @@ mediaPlayer.reset();
         if ((mediaPlayer !=null)&&(!mediaPlayer.isPlaying()))
             mediaPlayer.start();
         else  mediaPlayer.pause();
+    }
+    public  void  shuffleTracks(boolean enabled) {
+        ArrayList<AudioTrack> shuffledTracks = tracks;
+        if (enabled) {
+            Collections.shuffle(tracks);
+        }
+        else  {
+            Collections.sort(tracks, new Comparator<AudioTrack>() {
+                @Override
+                public int compare(AudioTrack audioTrack, AudioTrack t1) {
+                    //return (int) ((int) audioTrack.getId() - t1.getId());
+                    return audioTrack.getDisplayName().compareTo(t1.getDisplayName());
+                }
+            });
+        }
     }
     public  void  setPlaybackPosition(int position) {
 mediaPlayer.seekTo(position);

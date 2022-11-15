@@ -6,8 +6,9 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -27,7 +28,7 @@ private AppCompatSeekBar rewind_fastForward;
 private MaterialButton play_pause_button;
 private MaterialButton previous_button;
 private  MaterialButton next_button;
-private  MaterialButton shuffle_button;
+private CheckBox shuffle_checkbox;
 private  TextView elapsed_time_textView;
 private  MusicService musicService;
 private  MusicService.MusicBinder musicBinder;
@@ -75,6 +76,7 @@ trackInfo =   musicService.getCurrentTrack(true);
         play_pause_button = findViewById(R.id.play_pause_button);
         next_button = findViewById(R.id.next_button);
         previous_button = findViewById(R.id.previous_button);
+        shuffle_checkbox = findViewById(R.id.shuffle_button);
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,6 +94,14 @@ trackInfo =   musicService.getCurrentTrack(true);
                 trackInfo = musicService.previousTrack();
                 currently_playing_info_textView.setText(getResources().getString(R.string.dummy_text_string) + " " + trackInfo);
 
+            }
+        });
+        shuffle_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b)
+                    musicService.shuffleTracks(true);
+                else musicService.shuffleTracks(false);
             }
         });
         Bundle injecter = getIntent().getBundleExtra(MusicFragment.INJECTER_KEY);

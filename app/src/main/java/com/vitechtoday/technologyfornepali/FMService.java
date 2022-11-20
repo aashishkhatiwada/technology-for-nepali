@@ -45,6 +45,7 @@ private  boolean isPrepared;
     private AudioManager audioManager;
     private Notification notification;
     private final IBinder fmHandler = new FmHandler();
+    private  EventReceiver eventReceiver = new EventReceiver();
     private static  boolean running;
     public void initialize() {
         mediaPlayer = FMMediaPlayer.getMediaPlayer();
@@ -141,7 +142,7 @@ if (isPrepared) {
     @Override
     public void onCreate() {
 
-        registerReceiver(new EventReceiver(), new IntentFilter(ACTION_FM_PLAYED));
+        registerReceiver(eventReceiver, new IntentFilter(ACTION_FM_PLAYED));
 
         handler = new Handler();
 initialize();
@@ -173,7 +174,7 @@ initialize();
     @Override
     public void onDestroy() {
         Log.d("FMService", "onDestroy called, releasing resources");
-
+unregisterReceiver(eventReceiver);
         handler.removeCallbacks(this);
             mediaPlayer.reset();
             //executorService.shutdown();

@@ -33,8 +33,13 @@ FMFragment.getProgressDialog().dismiss();
  }
 
 }
-
-        if (intent.getAction().equals(AudioAndFmActivity.ACTION_STOP_FM)) {
+else  if (intent.getAction().equals(AudioAndFmActivity.ACTION_STOP_MUSIC)) {
+    if (MusicPlayerActivity.getMusicService() != null) {
+MusicPlayerActivity.getMusicService().stopAudio();
+MusicPlayerActivity.getMusicService().stopSelf();
+    }
+        }
+         else if (intent.getAction().equals(AudioAndFmActivity.ACTION_STOP_FM)) {
             if (FMFragment.getFmService() != null) {
                 FMFragment.getFmService().stopFM();
             }

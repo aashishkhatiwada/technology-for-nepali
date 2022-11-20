@@ -17,6 +17,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class AudioAndFmActivity extends AppCompatActivity  implements View.OnClickListener {
     public  static  final  String ACTION_STOP_FM = "com.vitechtoday.technologyfornepali.stopFm";
+    public  static  final String ACTION_STOP_MUSIC = "com.vitechtoday.technologyfornepali.StopMusic";
 
     public  static final  String LAUNCHED_FROM_NOTIFICATION_KEY = "launchedFromNotification";
 private TabLayout tabLayout;
@@ -24,7 +25,7 @@ private Intent fmService;
 private Button play_stop_button;
 private  TabLayout.Tab music;
 private TabLayout.Tab fm;
-
+private  EventReceiver eventReceiver = new EventReceiver();
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -37,8 +38,8 @@ private TabLayout.Tab fm;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_and_fm);
-        registerReceiver(new EventReceiver(), new IntentFilter(AudioAndFmActivity.ACTION_STOP_FM));
-
+        registerReceiver(eventReceiver, new IntentFilter(AudioAndFmActivity.ACTION_STOP_FM));
+registerReceiver(eventReceiver, new IntentFilter(AudioAndFmActivity.ACTION_STOP_MUSIC));
 ActivityCompat.requestPermissions(this, new  String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         tabLayout = findViewById(R.id.music_and_fm_tabLayout);
         play_stop_button= findViewById(R.id.play_stop_button);
@@ -61,12 +62,11 @@ play_stop_button.setOnClickListener(this);
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getText().equals("music")) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_frameLayout, MusicFragment.newInstance("", "")).commit();
+                    sendBroadcast(new Intent(AudioAndFmActivity.ACTION_STOP_FM));
 toggleViewState(play_stop_button, false);
-                    //play_stop_button.setVisibility(View.GONE);
                 }
                 else  if (tab.getText().equals("fm")) {
-                    //play_stop_button.setVisibility(View.VISIBLE);
-
+                    sendBroadcast(new Intent(AudioAndFmActivity.ACTION_STOP_MUSIC));
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_frameLayout, FMFragment.newInstance("", "")).commit();
                         toggleViewState(play_stop_button, true);
                 }

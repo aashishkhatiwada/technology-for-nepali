@@ -2,12 +2,12 @@ package com.vitechtoday.technologyfornepali;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.IBinder;
 
 import com.vitechtoday.technologyfornepali.model.AudioTrack;
-import com.vitechtoday.technologyfornepali.model.FMMediaPlayer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +16,7 @@ import java.util.Comparator;
 import java.util.concurrent.TimeUnit;
 
 public class MusicService extends Service {
+
     public  interface  OnTrackCompleteListener {
         void  onTrackComplete();
     }
@@ -29,6 +30,8 @@ public class MusicService extends Service {
 private ArrayList<AudioTrack> tracks;
 private  int playbackId;
 private  OnTrackCompleteListener onTrackCompleteListener;
+private  EventReceiver eventReceiver = new EventReceiver();
+
     public MusicService() {
     }
 
@@ -41,7 +44,7 @@ private  OnTrackCompleteListener onTrackCompleteListener;
     @Override
     public void onCreate() {
         super.onCreate();
-        mediaPlayer = FMMediaPlayer.getMediaPlayer();
+        mediaPlayer = new MediaPlayer();
     }
 
     @Override
@@ -93,6 +96,10 @@ mediaPlayer.reset();
             mediaPlayer.start();
         else  mediaPlayer.pause();
     }
+    public  void  stopAudio() {
+        if (isPlaying())
+            mediaPlayer.stop();
+    }
     public  void  shuffleTracks(boolean enabled) {
         ArrayList<AudioTrack> shuffledTracks = tracks;
         if (enabled) {
@@ -102,7 +109,6 @@ mediaPlayer.reset();
             Collections.sort(tracks, new Comparator<AudioTrack>() {
                 @Override
                 public int compare(AudioTrack audioTrack, AudioTrack t1) {
-                    //return (int) ((int) audioTrack.getId() - t1.getId());
                     return audioTrack.getDisplayName().compareTo(t1.getDisplayName());
                 }
             });
@@ -143,4 +149,8 @@ mediaPlayer.seekTo(position);
         return  mediaPlayer.getDuration();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

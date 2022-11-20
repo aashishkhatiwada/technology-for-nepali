@@ -33,6 +33,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="com.vitechtoday.technologyfornepali.stopFm" />
+                <action android:name="com.vitechtoday.technologyfornepali.stopMusic"/>
                 <action android:name="com.vitechtoday.technologyfornepali.fm_played "/>
             </intent-filter>
         </receiver>

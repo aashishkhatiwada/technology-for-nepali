@@ -30,7 +30,7 @@ private MaterialButton previous_button;
 private  MaterialButton next_button;
 private CheckBox shuffle_checkbox;
 private  TextView elapsed_time_textView;
-private  MusicService musicService;
+private  static MusicService musicService;
 private  MusicService.MusicBinder musicBinder;
 private ArrayList<AudioTrack> fileList;
 private  Intent intent;
@@ -52,7 +52,6 @@ private  final ServiceConnection serviceConnection = new ServiceConnection() {
 
         isBound =true;
     }
-
     @Override
     public void onServiceDisconnected(ComponentName componentName) {
 isBound = false;
@@ -60,6 +59,10 @@ isBound = false;
 };
 private  boolean isBound;
 private  String trackInfo;
+    public  static  MusicService getMusicService() {
+        return  musicService;
+    }
+
     @Override
     public void onTrackComplete() {
 trackInfo =   musicService.getCurrentTrack(true);
